@@ -1,0 +1,7 @@
+name = "SSCF"
+uuid = "24e722ee-f66f-4a3d-ba3c-342f2610e67d"
+authors = ["Thomas Foerster <tfoerster@sablesys.com> and contributors"]
+version = "0.1.0"
+
+[compat]
+julia = "1.5"
