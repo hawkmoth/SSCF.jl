@@ -162,7 +162,7 @@ struct SSCFFooter
 end
 
 """Main SSCF File data structure"""
-struct SSCF 
+struct SSCFFile 
     path :: String
     data :: Matrix{Float32}
     header :: SSCFHeader
@@ -171,9 +171,9 @@ struct SSCF
     """Open file descriptor and read file contents
 
     Example Usage:
-    >> sscf = open("test.exp") |> SSCF    
+    >> sscf = open("test.exp") |> SSCFFile    
     """
-    function SSCF(f::IOStream)
+    function SSCFFile(f::IOStream)
 	header = SSCFHeader(f)
 		
 	# mem map
@@ -192,10 +192,10 @@ end
 
 
     Example Usage:
-    >> sscf = open("test.exp") |> SSCF    
+    >> sscf = open("test.exp") |> SSCFFile    
     >> o2_a = sscf["O2_A"]
 """
-function Base.getindex(collection::SSCF, key::String)
+function Base.getindex(collection::SSCFFile, key::String)
     index = findfirst([x.title == key for x in collection.footer.channelinfo])
     return collection.data[index,:]
 end
