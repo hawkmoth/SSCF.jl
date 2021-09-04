@@ -9,4 +9,5 @@ Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
 Mmap = "a63ad114-7e13-5084-954f-fe012c677804"
 
 [compat]
+Colors = "0.12"
 julia = "1.5"
