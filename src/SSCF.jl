@@ -194,10 +194,28 @@ struct SSCFFile
     SSCFFile(filename::String)= open(filename) |> SSCFFile
 end
 
-"""Direct access for some header/footer data as properties"""
+"""Direct access for some header/footer data as properties
+
+.samples - number of samples in file
+.channels - number of data channels
+.starttime - time of first sample
+.endtime - time of last sample
+.interval - sample interval rounded to msec precision
+.times - vector of sample times
+.markers - the marker table (type MarkerTable)
+.remarks - remarks string
+"""
 function Base.getproperty(f::SSCFFile, v::Symbol)
 	if v == :samples
-    	return f.header.samples
+    	    return f.header.samples
+        elseif v == :times
+            return f.starttime:f.interval:f.endtime
+        elseif v == :starttime
+            return f.endtime - (f.samples-1) * f.interval
+        elseif v == :endtime
+            return f.footer.timestamp
+        elseif v == :interval
+            return Millisecond(f.header.dt * 1000)
 	elseif v == :channels
 	    return f.header.channels
 	elseif v == :markers
