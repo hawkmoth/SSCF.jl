@@ -185,6 +185,13 @@ struct SSCFFile
 	
 	return new(f.name, data, header, footer)
     end
+
+    """Open file given by filename
+
+    Example Usage:
+    >> sscf = SSCFFile("test.exp")
+    """
+    SSCFFile(filename::String)= open(filename) |> SSCFFile
 end
 
 """Index based access to data channels by name
