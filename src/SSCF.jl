@@ -76,8 +76,7 @@ struct MarkerTable
 	code = Vector{Char}(undef, length(raw))
 		
 	for i in 1:length(raw)
-	    samples[i] = raw[i] % 1E6
-	    code[i] = Char(raw[i] // 1E6)
+            code[i], samples[i] = divrem(raw[i],1E6)
 	end
 		
 	return new(samples, code)
