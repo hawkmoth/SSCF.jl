@@ -194,6 +194,21 @@ struct SSCFFile
     SSCFFile(filename::String)= open(filename) |> SSCFFile
 end
 
+"""Direct access for some header/footer data as properties"""
+function Base.getproperty(f::SSCFFile, v::Symbol)
+	if v == :samples
+    	return f.header.samples
+	elseif v == :channels
+	    return f.header.channels
+	elseif v == :markers
+	    return f.footer.markers
+	elseif v == :remarks
+	    return f.footer.remarks
+	else
+	    return getfield(f, v)
+	end
+end
+
 """Index based access to data channels by name
 
 
