@@ -1,5 +1,7 @@
 module SSCF
 
+export SSCFFile
+
 using Dates
 using Colors
 using Mmap
